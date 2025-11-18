@@ -41,9 +41,13 @@ public class VirtualServer {
 
         // Create new process record
         record = new ProcessRecord(packageName, userId);
-        mProcessMap.put(key, record);
         
-        // TODO: Start the actual virtual process
+        // Mark process as alive (simulated for now)
+        // In a full implementation, this would fork a new process
+        record.pid = android.os.Process.myPid(); // Use current PID for now
+        record.alive = true;
+        
+        mProcessMap.put(key, record);
         
         return record;
     }

@@ -18,9 +18,15 @@ import com.virtue.gms.huawei.data.VirtualAppsViewModel
 @Composable
 fun AppsScreen(viewModel: VirtualAppsViewModel = viewModel()) {
     val apps by viewModel.apps.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    var showInstallDialog by remember { mutableStateOf(false) }
     
     Box(modifier = Modifier.fillMaxSize()) {
-        if (apps.isEmpty()) {
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        } else if (apps.isEmpty()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
