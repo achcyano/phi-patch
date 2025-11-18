@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Virtue GMS</string>
+    <string name="apps_tab">Apps</string>
+    <string name="environments_tab">Environments</string>
+    <string name="settings_tab">Settings</string>
+</resources>
