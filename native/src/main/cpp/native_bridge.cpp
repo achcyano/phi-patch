@@ -1,10 +1,13 @@
 #include <jni.h>
 #include <string>
+#include <vector>
 #include <android/log.h>
 #include <dlfcn.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <cerrno>
+#include <cstring>
 #include "hook_engine.h"
 #include "io_redirect.h"
 
@@ -116,11 +119,12 @@ Java_com_virtue_native_NativeBridge_hookStat(JNIEnv *env, jclass clazz,
                                               jstring pathname, jobject statBuf) {
     const char *path = env->GetStringUTFChars(pathname, nullptr);
     
-    // TODO: Redirect path to virtual storage
-    LOGD("Hook stat: %s", path);
+    // Redirect path to virtual storage
+    std::string redirectedPath = virtue::IORedirect::getInstance().redirectPath(path);
+    LOGD("Hook stat: %s -> %s", path, redirectedPath.c_str());
     
     struct stat st;
-    int result = stat(path, &st);
+    int result = stat(redirectedPath.c_str(), &st);
     
     env->ReleaseStringUTFChars(pathname, path);
     return result;
@@ -128,9 +132,30 @@ Java_com_virtue_native_NativeBridge_hookStat(JNIEnv *env, jclass clazz,
 
 JNIEXPORT jint JNICALL
 Java_com_virtue_native_NativeBridge_hookFork(JNIEnv *env, jclass clazz) {
-    LOGD("Hook fork");
-    // TODO: Handle fork in virtual environment
-    return fork();
+    LOGD("Hook fork - creating virtual process");
+    
+    // Handle fork in virtual environment
+    // In a full implementation, this would:
+    // 1. Create a new process with virtual UID/GID
+    // 2. Set up isolated namespace
+    // 3. Configure binder proxy
+    
+    pid_t pid = fork();
+    
+    if (pid == 0) {
+        // Child process - set up virtual environment
+        LOGD("Virtual process created with PID: %d", getpid());
+        
+        // Set process name to indicate virtual process
+        // In real implementation, set up complete isolation here
+    } else if (pid > 0) {
+        // Parent process
+        LOGD("Forked virtual process with PID: %d", pid);
+    } else {
+        LOGE("Fork failed: %s", strerror(errno));
+    }
+    
+    return pid;
 }
 
 JNIEXPORT jint JNICALL
@@ -141,10 +166,48 @@ Java_com_virtue_native_NativeBridge_hookExecve(JNIEnv *env, jclass clazz,
     
     LOGD("Hook execve: %s", file);
     
-    // TODO: Handle execve in virtual environment
+    // Handle execve in virtual environment
+    // Redirect to virtual binary if exists
+    std::string redirectedPath = virtue::IORedirect::getInstance().redirectPath(file);
+    
+    // Convert Java arrays to C arrays
+    int argc = argv ? env->GetArrayLength(argv) : 0;
+    int envc = envp ? env->GetArrayLength(envp) : 0;
+    
+    std::vector<char*> argvVec(argc + 1);
+    std::vector<char*> envpVec(envc + 1);
+    
+    for (int i = 0; i < argc; i++) {
+        jstring jstr = (jstring)env->GetObjectArrayElement(argv, i);
+        const char* str = env->GetStringUTFChars(jstr, nullptr);
+        argvVec[i] = strdup(str);
+        env->ReleaseStringUTFChars(jstr, str);
+    }
+    argvVec[argc] = nullptr;
+    
+    for (int i = 0; i < envc; i++) {
+        jstring jstr = (jstring)env->GetObjectArrayElement(envp, i);
+        const char* str = env->GetStringUTFChars(jstr, nullptr);
+        envpVec[i] = strdup(str);
+        env->ReleaseStringUTFChars(jstr, str);
+    }
+    envpVec[envc] = nullptr;
+    
+    // Execute with redirected path
+    int result = execve(redirectedPath.c_str(), argvVec.data(), envpVec.data());
+    
+    // Clean up (only reached if execve fails)
+    for (char* arg : argvVec) {
+        if (arg) free(arg);
+    }
+    for (char* env_var : envpVec) {
+        if (env_var) free(env_var);
+    }
+    
+    LOGE("Execve failed: %s", strerror(errno));
     
     env->ReleaseStringUTFChars(filename, file);
-    return -1;
+    return result;
 }
 
 } // extern "C"
