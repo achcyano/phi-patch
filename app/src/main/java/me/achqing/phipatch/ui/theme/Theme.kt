@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.ui.theme
+package me.achqing.phipatch.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

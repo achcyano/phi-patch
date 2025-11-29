@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.ui.navigation
+package me.achqing.phipatch.ui.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.achqing.virtuegms.ui.anim.fragmentEnterPopTransition
-import me.achqing.virtuegms.ui.anim.fragmentEnterTransition
-import me.achqing.virtuegms.ui.anim.fragmentExitPopTransition
-import me.achqing.virtuegms.ui.anim.fragmentExitTransition
-import me.achqing.virtuegms.ui.screens.settings.SettingsScreen
+import me.achqing.phipatch.ui.anim.fragmentEnterPopTransition
+import me.achqing.phipatch.ui.anim.fragmentEnterTransition
+import me.achqing.phipatch.ui.anim.fragmentExitPopTransition
+import me.achqing.phipatch.ui.anim.fragmentExitTransition
+import me.achqing.phipatch.ui.screens.settings.SettingsScreen
 
 //import me.achqing.virtuegms.ui.screens.settings.SettingsScreen
 

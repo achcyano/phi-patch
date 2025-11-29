@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.core
+package me.achqing.phipatch.core
 
 import android.app.Application
 import android.content.Context

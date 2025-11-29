@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.ui.anim
+package me.achqing.phipatch.ui.anim
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition

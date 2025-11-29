@@ -1,9 +1,9 @@
-package me.achqing.virtuegms.ui
+package me.achqing.phipatch.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import me.achqing.virtuegms.R
+import me.achqing.phipatch.R
 
 object MyIcons{
     val Translate: ImageVector

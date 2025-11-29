@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.ui.theme
+package me.achqing.phipatch.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

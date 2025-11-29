@@ -14,7 +14,7 @@ fun buildTime(): String = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.CH
 }.format(Date())
 
 android {
-    namespace = "me.achqing.virtuegms"
+    namespace = "me.achqing.phipatch"
     compileSdk = 36
 
     defaultConfig {

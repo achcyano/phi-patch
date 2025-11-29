@@ -1,8 +1,8 @@
-package me.achqing.virtuegms.core
+package me.achqing.phipatch.core
 
 import android.annotation.SuppressLint
 import android.content.Context
-import me.achqing.virtuegms.data.PreferenceModel
+import me.achqing.phipatch.data.PreferenceModel
 
 
 @SuppressLint("StaticFieldLeak")

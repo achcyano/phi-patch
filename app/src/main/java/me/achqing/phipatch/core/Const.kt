@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.core
+package me.achqing.phipatch.core
 
 object Const {
     const val REPOSITORY_URL = "https://github.com/achcyano/virtue-gms-huawei"

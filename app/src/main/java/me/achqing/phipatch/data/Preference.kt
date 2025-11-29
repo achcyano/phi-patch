@@ -1,4 +1,4 @@
-package me.achqing.virtuegms.data
+package me.achqing.phipatch.data
 
 import android.content.Context
 import android.content.SharedPreferences
