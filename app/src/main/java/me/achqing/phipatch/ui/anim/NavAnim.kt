@@ -9,7 +9,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.ui.graphics.TransformOrigin
 
-fun fragmentEnterTransition(duration: Int = 200): EnterTransition {
+fun navEnterTransition(duration: Int = 200): EnterTransition {
     return fadeIn(
         animationSpec = tween(durationMillis = duration),
         initialAlpha = 0f
@@ -20,7 +20,7 @@ fun fragmentEnterTransition(duration: Int = 200): EnterTransition {
     )
 }
 
-fun fragmentEnterPopTransition(duration: Int = 200): EnterTransition {
+fun navEnterPopTransition(duration: Int = 200): EnterTransition {
     return fadeIn(
         animationSpec = tween(durationMillis = duration),
         initialAlpha = 0f
@@ -31,7 +31,7 @@ fun fragmentEnterPopTransition(duration: Int = 200): EnterTransition {
     )
 }
 
-fun fragmentExitTransition(duration: Int = 200): ExitTransition {
+fun navExitTransition(duration: Int = 200): ExitTransition {
     return fadeOut(
         animationSpec = tween(durationMillis = duration),
         targetAlpha = 0f
@@ -42,7 +42,7 @@ fun fragmentExitTransition(duration: Int = 200): ExitTransition {
     )
 }
 
-fun fragmentExitPopTransition(duration: Int = 200): ExitTransition {
+fun navExitPopTransition(duration: Int = 200): ExitTransition {
     return fadeOut(
         animationSpec = tween(durationMillis = duration),
         targetAlpha = 0f

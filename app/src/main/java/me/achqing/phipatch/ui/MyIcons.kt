@@ -21,4 +21,12 @@ object MyIcons{
     val ChevronRight: ImageVector
         @Composable
         get() = ImageVector.Companion.vectorResource(id = R.drawable.chevron_right)
+
+    val KeyboardArrowUp: ImageVector
+        @Composable
+        get() = ImageVector.Companion.vectorResource(id = R.drawable.keyboard_arrow_up)
+
+    val KeyBoardArrowDown: ImageVector
+        @Composable
+        get() = ImageVector.Companion.vectorResource(id = R.drawable.keyboard_arrow_down)
 }

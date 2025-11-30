@@ -1,7 +1,5 @@
 package me.achqing.phipatch.core
 
-import android.util.Log
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -28,12 +26,7 @@ object UpdateChecker {
     fun compareSemver(latest: String): Boolean {
         val buildData = OffsetDateTime.parse(BuildConfig.BUILD_TIME).plusDays(1)
         val latestData = OffsetDateTime.parse(latest)
-        if (latestData.isAfter(buildData)) {
-
-            Log.d("PhiPatch", "compareData:false")
-            return false
-        }
-        return true
+        return !latestData.isAfter(buildData)
     }
 
     suspend fun isUpdateAvailable(): Result<Boolean> =
