@@ -3,7 +3,6 @@ package me.achqing.phipatch.ui.screens.settings
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,7 +45,7 @@ fun SettingsSection(
         style = MaterialTheme.typography.titleLarge,
         color = MaterialTheme.colorScheme.primary,
         fontSize = 22.sp,
-        modifier = Modifier.padding(vertical = 12.dp),
+        modifier = Modifier.padding(vertical = 6.dp),
         textAlign = TextAlign.Left
     )
 
@@ -321,8 +319,12 @@ fun SettingsItemEntry(
             title = title,
             description = description,
             modifier = Modifier
-                .padding(start = 0.dp, end = 12.dp)
-                .padding(vertical = 15.dp),
+                .then(
+                    if (icon == null)
+                        Modifier.padding(start = 0.dp, end = 12.dp)
+                    else
+                        Modifier.padding(start = 12.dp, end = 12.dp)
+                    ).padding(vertical = 15.dp),
             onEntry = true
         )
     }
@@ -350,7 +352,12 @@ fun SettingsSelectEntry(
             title = title,
             description = description,
             modifier = Modifier
-                .padding(start = 0.dp, end = 12.dp)
+                .then(
+                    if (icon == null)
+                        Modifier.padding(start = 0.dp, end = 12.dp)
+                    else
+                        Modifier.padding(start = 12.dp, end = 12.dp)
+                )
                 .padding(vertical = 15.dp),
             trailing = {
                 Text(
@@ -391,6 +398,12 @@ fun SettingsSwitchEntry(
             },
             onEntry = true,
             modifier = Modifier
+                .then(
+                    if (icon == null)
+                        Modifier.padding(start = 0.dp, end = 12.dp)
+                    else
+                        Modifier.padding(start = 12.dp, end = 12.dp)
+                )
                 .padding(start = 0.dp, end = 12.dp)
         )
     }

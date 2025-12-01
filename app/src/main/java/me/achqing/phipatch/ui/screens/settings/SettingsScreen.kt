@@ -89,18 +89,31 @@ fun SettingsScreen(
 
                         onClick = { /* 打开文件选择器 */ }
                     )
+                    SettingsItemEntry(
+                        title = "SettingsItemEntry",
+                        icon = MyIcons.Translate,
+                        onClick = { /* 打开文件选择器 */ }
+                    )
                     SettingsSelectEntry(
 
                         title = "更新频道",
-
+                        icon = MyIcons.Translate,
                         value = "稳定版",
                         onClick = { /* 打开选择弹窗 */ }
                     )
                     SettingsSwitchEntry(
                         title = "启用安全模式",
-
+                        icon = MyIcons.Translate,
                         checked = true,
-                        onCheckedChange = { /* 更新状态 */ })
+                        onCheckedChange = { /* 更新状态 */ }
+                    )
+
+                    SettingsSwitchEntry(
+                        title = "启用安全模式",
+                        //icon = MyIcons.Translate,
+                        checked = true,
+                        onCheckedChange = { /* 更新状态 */ }
+                    )
                 }
             }
         }
